@@ -37,5 +37,3 @@ lerna-debug.log*
 # bundle
 packages/**/*.d.ts
 packages/**/*.js
-
-.env
