@@ -34,7 +34,7 @@ export class AuthService {
       },
     });
 
-    return { message: 'signup message' };
+    return { message: 'Signup succesfully' };
   }
 
   async signin(dto: AuthDto, req: Request, res: Response) {
@@ -71,8 +71,9 @@ export class AuthService {
     return res.send({ message: 'Logged in succesfully' });
   }
 
-  async singout() {
-    return '';
+  async singout(req: Request, res: Response) {
+    res.clearCookie('token');
+    return res.send({ message: 'Logged out succesfully' });
   }
 
   async hashPassword(password: string) {
