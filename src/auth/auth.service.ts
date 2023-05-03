@@ -30,8 +30,27 @@ export class AuthService {
     return { message: 'signup message' };
   }
 
-  async signin() {
-    return '';
+  async signin(dto: AuthDto) {
+    const { email, password } = dto;
+
+    const foundUser = await this.prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (!foundUser) {
+      throw new BadRequestException('Wrong credentials!');
+    }
+
+    const isMatch = await this.comparePasswords({
+      password,
+      hash: foundUser.hashedPassword,
+    });
+
+    if (!isMatch) {
+      throw new BadRequestException('Wrong credentials!');
+    }
+
+    return { message: 'singin successful' };
   }
 
   async singout() {
@@ -40,8 +59,10 @@ export class AuthService {
 
   async hashPassword(password: string) {
     const saltOrRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+    return await bcrypt.hash(password, saltOrRounds);
+  }
 
-    return hashedPassword;
+  async comparePasswords(args: { password: string; hash: string }) {
+    return await bcrypt.compare(args.password, args.hash);
   }
 }
