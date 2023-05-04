@@ -14,7 +14,7 @@ import { Request, Response } from 'express';
 export class AuthService {
   constructor(private prisma: PrismaService, private jwt: JwtService) {}
 
-  async signup(dto: AuthDto) {
+  async signUp(dto: AuthDto) {
     const { email, password } = dto;
 
     const foundUser = await this.prisma.user.findUnique({
@@ -37,7 +37,7 @@ export class AuthService {
     return { message: 'Signup succesfully' };
   }
 
-  async signin(dto: AuthDto, req: Request, res: Response) {
+  async signIn(dto: AuthDto, req: Request, res: Response) {
     const { email, password } = dto;
 
     const foundUser = await this.prisma.user.findUnique({
@@ -71,7 +71,7 @@ export class AuthService {
     return res.send({ message: 'Logged in succesfully' });
   }
 
-  async singout(req: Request, res: Response) {
+  async singOut(req: Request, res: Response) {
     res.clearCookie('token');
     return res.send({ message: 'Logged out succesfully' });
   }

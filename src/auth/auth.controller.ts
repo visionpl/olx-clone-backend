@@ -7,17 +7,17 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
-  signup(@Body() dto: AuthDto) {
-    return this.authService.signup(dto);
+  signUp(@Body() dto: AuthDto) {
+    return this.authService.signUp(dto);
   }
 
   @Post('signin')
-  signin(@Body() dto: AuthDto, @Req() req, @Res() res) {
-    return this.authService.signin(dto, req, res);
+  signIn(@Body() dto: AuthDto, @Req() req, @Res() res) {
+    return this.authService.signIn(dto, req, res);
   }
 
   @Get('signout')
-  signout(@Req() req, @Res() res) {
-    return this.authService.singout(req, res);
+  signOut(@Req() req, @Res() res) {
+    return this.authService.singOut(req, res);
   }
 }
