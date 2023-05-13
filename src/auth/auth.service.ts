@@ -72,7 +72,8 @@ export class AuthService {
   }
 
   async singOut(req: Request, res: Response) {
-    res.clearCookie('token');
+    res.clearCookie('token', { httpOnly: true });
+
     return res.send({ message: 'Logged out succesfully' });
   }
 
