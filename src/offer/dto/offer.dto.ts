@@ -1,6 +1,13 @@
-// import { IsNotEmpty, IsString, IsEmail, Length } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class OfferDto {
-  public name: string;
+  @IsNotEmpty()
+  public offerName: string;
+
+  @IsNotEmpty()
+  public description: string;
+
+  @IsNotEmpty()
+  @IsNumber()
   public price: number;
 }

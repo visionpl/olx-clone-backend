@@ -16,4 +16,13 @@ model User {
   hashedPassword String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+}
+
+model Offer {
+  id String @unique @default(uuid())
+
+  offerName String
+  description String
+  price Decimal
 }
