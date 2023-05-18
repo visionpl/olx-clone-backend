@@ -1,4 +1,4 @@
-import { Post, Body } from '@nestjs/common';
+import { Post, Body, Req, Res } from '@nestjs/common';
 import { Controller } from '@nestjs/common';
 import { OfferService } from './offer.service';
 import { OfferDto } from './dto/offer.dto';
@@ -8,7 +8,7 @@ export class OfferController {
   constructor(private readonly offerService: OfferService) {}
 
   @Post('add')
-  add(@Body() dto: OfferDto) {
-    return this.offerService.add(dto);
+  add(@Body() dto: OfferDto, @Req() req) {
+    return this.offerService.add(dto, req);
   }
 }
