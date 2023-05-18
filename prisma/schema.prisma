@@ -11,9 +11,19 @@ datasource db {
 }
 
 model User {
-  id String @unique @default(uuid())
-  email String @unique
+  id        String   @id @default(uuid())
+  email     String   @unique
   hashedPassword String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  offers    Offer[]  @relation("UserOffers")
+}
+
+model Offer {
+  id          String   @id @default(uuid())
+  offerName   String
+  description String
+  price       Decimal
+  createdBy   User?    @relation("UserOffers", fields: [createdById], references: [id])
+  createdById String? 
 }
