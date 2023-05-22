@@ -13,4 +13,7 @@ export class OfferDto {
 
   @IsEmail()
   public userEmail: string;
+
+  @IsNumber()
+  public categoryId: number;
 }

@@ -20,10 +20,19 @@ model User {
 }
 
 model Offer {
-  id          String   @id @default(uuid())
+  id          String           @id @default(uuid())
   offerName   String
   description String
   price       Decimal
-  createdBy   User?    @relation("UserOffers", fields: [userEmail], references: [email])
-  userEmail String? 
+  createdBy   User?            @relation("UserOffers", fields: [userEmail], references: [email])
+  userEmail   String?
+  categoryId  Int?
+  category    Category? @relation("OfferCategory", fields: [categoryId], references: [id])
+}
+
+model Category {
+  id        Int                @id @default(autoincrement())
+  name      String             @unique
+  image     String?
+  offers    Offer[]            @relation("OfferCategory")
 }
