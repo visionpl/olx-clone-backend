@@ -24,6 +24,6 @@ model Offer {
   offerName   String
   description String
   price       Decimal
-  createdBy   User?    @relation("UserOffers", fields: [createdById], references: [id])
-  createdById String? 
+  createdBy   User?    @relation("UserOffers", fields: [userEmail], references: [email])
+  userEmail String? 
 }

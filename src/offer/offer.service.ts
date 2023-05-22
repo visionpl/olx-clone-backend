@@ -9,21 +9,16 @@ export class OfferService {
   constructor(private prisma: PrismaService, private jwt: JwtService) {}
 
   async add(dto: OfferDto, @Req() req: Request) {
-    const { offerName, description, price } = dto;
+    const { offerName, description, price, userEmail } = dto;
     const token = req.cookies.token;
 
-    let createdById: string | undefined;
-
     if (token) {
-      const decodedToken = this.jwt.decode(token) as { sub: string };
-      createdById = decodedToken['id'];
-
       await this.prisma.offer.create({
         data: {
           offerName,
           description,
           price,
-          createdById,
+          userEmail,
         },
       });
 
