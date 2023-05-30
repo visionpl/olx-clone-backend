@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class OfferDto {
   @IsNotEmpty()
@@ -22,4 +22,7 @@ export class OfferDto {
 
   @IsNumber()
   public conditionId: number;
+
+  @IsString()
+  public phoneNumber: string;
 }

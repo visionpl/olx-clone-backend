@@ -26,6 +26,7 @@ model Offer {
   price       Decimal
   createdBy   User?            @relation("UserOffers", fields: [userEmail], references: [email])
   userEmail   String?
+  phoneNumber String?
   categoryId  Int?
   category    Category? @relation("OfferCategory", fields: [categoryId], references: [id])
   districtId  Int?

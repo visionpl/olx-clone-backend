@@ -17,6 +17,7 @@ export class OfferService {
       categoryId,
       districtId,
       conditionId,
+      phoneNumber,
     } = dto;
     const token = req.cookies.token;
 
@@ -30,6 +31,7 @@ export class OfferService {
           categoryId,
           districtId,
           conditionId,
+          phoneNumber,
         },
       });
 
