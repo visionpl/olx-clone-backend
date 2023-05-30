@@ -16,4 +16,10 @@ export class OfferDto {
 
   @IsNumber()
   public categoryId: number;
+
+  @IsNumber()
+  public districtId: number;
+
+  @IsNumber()
+  public conditionId: number;
 }

@@ -9,7 +9,15 @@ export class OfferService {
   constructor(private prisma: PrismaService, private jwt: JwtService) {}
 
   async add(dto: OfferDto, @Req() req: Request) {
-    const { offerName, description, price, userEmail, categoryId } = dto;
+    const {
+      offerName,
+      description,
+      price,
+      userEmail,
+      categoryId,
+      districtId,
+      conditionId,
+    } = dto;
     const token = req.cookies.token;
 
     if (token) {
@@ -20,6 +28,8 @@ export class OfferService {
           price,
           userEmail,
           categoryId,
+          districtId,
+          conditionId,
         },
       });
 
