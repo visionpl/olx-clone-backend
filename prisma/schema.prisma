@@ -28,6 +28,10 @@ model Offer {
   userEmail   String?
   categoryId  Int?
   category    Category? @relation("OfferCategory", fields: [categoryId], references: [id])
+  districtId  Int?
+  district    District? @relation("OfferDistric", fields: [districtId], references: [id])
+  conditionId  Int?
+  condition    Condition? @relation("OfferCondition", fields: [conditionId], references: [id])
 }
 
 model Category {
@@ -35,4 +39,16 @@ model Category {
   name      String             @unique
   image     String?
   offers    Offer[]            @relation("OfferCategory")
+}
+
+model District {
+  id        Int                @id @default(autoincrement())
+  name      String             @unique
+  offers    Offer[]            @relation("OfferDistric")
+}
+
+model Condition {
+  id        Int                @id @default(autoincrement())
+  name      String             @unique
+  offers    Offer[]            @relation("OfferCondition")
 }
