@@ -40,15 +40,35 @@ export class OfferService {
     throw new UnauthorizedException();
   }
 
+  // async random(@Query('q') q: string, @Req() req: Request) {
+  //   const token = req.cookies.token;
+  //   const quantity = q;
+
+  //   if (token) {
+  //     return this.prisma.offer.findMany({
+  //       take: +quantity || 1,
+  //       orderBy: {
+  //         random: true,
+  //       },
+  //     });
+  //   }
+  //   throw new UnauthorizedException();
+  // }
   async random(@Query('q') q: string, @Req() req: Request) {
     const token = req.cookies.token;
-    const quantity = q;
+    const quantity = +q || 1;
 
     if (token) {
-      return this.prisma.offer.findMany({
-        take: +quantity || 1,
-      });
+      const offers = await this.prisma.offer.findMany();
+      const randomOffers = this.getRandomElements(offers, quantity);
+      return randomOffers;
     }
+
     throw new UnauthorizedException();
+  }
+
+  getRandomElements<T>(arr: T[], quantity: number): T[] {
+    const shuffled = arr.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, quantity);
   }
 }
