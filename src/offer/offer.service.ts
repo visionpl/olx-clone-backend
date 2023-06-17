@@ -1,4 +1,4 @@
-import { Injectable, Req, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Query, Req, UnauthorizedException } from '@nestjs/common';
 import { OfferDto } from './dto/offer.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
@@ -36,6 +36,18 @@ export class OfferService {
       });
 
       return { message: 'New offer has been added' };
+    }
+    throw new UnauthorizedException();
+  }
+
+  async random(@Query('q') q: string, @Req() req: Request) {
+    const token = req.cookies.token;
+    const quantity = q;
+
+    if (token) {
+      return this.prisma.offer.findMany({
+        take: +quantity || 1,
+      });
     }
     throw new UnauthorizedException();
   }
